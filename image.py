@@ -8,9 +8,10 @@
 
 
 from PIL import Image
+import tesserocr
 
 def getImage():
-    path = r'C:\Users\ruim.NNITCORP\Desktop\Middleware\Python\captcha\captcha.png'
+    path = r'E:\Python_files\captcha\captcha.png'
     image = Image.open(path)
     image = image.convert('P')
 
@@ -35,11 +36,12 @@ def createImage(image, arg1, arg2):
             if pix == arg1 or pix == arg2:
                 image2.putpixel((y,x),0)
 
-    image2.show()
+    #image2.show()
+    return image2
 
 def main():
     getColors()
-    createImage(getImage(), 0, 15)
-
+    newImage = createImage(getImage(), 0, 15)
+    print(tesserocr.image_to_text(newImage))
 
 main()
